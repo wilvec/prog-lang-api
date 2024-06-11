@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const programmingLanguages = require("../services/programmingLanguages");
-
+const verificarToken = require("../services/authMiddleware");
 /* GET programming languages. */
-router.get("/", async function (req, res, next) {
+router.get("/", verificarToken, async function (req, res, next) {
   try {
     res.json(await programmingLanguages.getMultiple(req.query.page));
   } catch (err) {
